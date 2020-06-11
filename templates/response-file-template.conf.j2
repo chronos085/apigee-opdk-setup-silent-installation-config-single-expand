@@ -26,29 +26,29 @@ REGION=dc-{{ region_num }}
 
 USE_ZK_CLUSTER={{ opdk_use_zk_cluster }}
 {# TODO: Build a module to construct the ZK_HOSTS value#}
-ZK_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host]['private_address'] }}{% if hostvars[host]['zk_observer'] is defined and hostvars[host]['zk_observer'] == 'true' %}:observer{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_HOSTS="{% for host in groups['zk'] %}{{ hostvars[host]['private_address'] }}{% if hostvars[host]['zk_observer'] is defined and hostvars[host]['zk_observer'] == 'true' %}:observer{% endif %}{% if not loop.last %} {% endif %}{% endfor %}"
 
 {# TODO: Build a module to construct the ZK_CLIENT_HOSTS value#}
 {% if groups['dc_1_edge'] is defined and inventory_hostname in groups['dc_1_edge'] %}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_1_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_1_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_2_edge'] is defined and inventory_hostname in groups['dc_2_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_1_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_1_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_3_edge'] is defined and inventory_hostname in groups['dc_3_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_3_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_3_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_4_edge'] is defined and inventory_hostname in groups['dc_4_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_4_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_4_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_5_edge'] is defined and inventory_hostname in groups['dc_5_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_5_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_5_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_6_edge'] is defined and inventory_hostname in groups['dc_6_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_6_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_6_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_7_edge'] is defined and inventory_hostname in groups['dc_7_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_7_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_7_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_8_edge'] is defined and inventory_hostname in groups['dc_8_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_8_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_8_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% elif groups['dc_9_edge'] is defined and inventory_hostname in groups['dc_9_edge']%}
-ZK_CLIENT_HOSTS="{% for host in groups['dc_9_ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['dc_9_zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% else %}
-ZK_CLIENT_HOSTS="{% for host in groups['ds'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
+ZK_CLIENT_HOSTS="{% for host in groups['zk'] %}{{ hostvars[host]['private_address'] }}{% if not loop.last %} {% endif %}{% endfor %}"
 {% endif %}
 
 USE_CASS_CLUSTER={{ opdk_use_cass_cluster }}
